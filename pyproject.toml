@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pulsar-four-beam-model"
+version = "0.1.0"
+description = "Reference implementation of a geometry-first four-beam model for young gamma-ray pulsars."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+  {name = "Paul K. H. Yeung", email = "pkh91yg@icrr.u-tokyo.ac.jp"},
+  {name = "Takayuki Saito"}
+]
+keywords = ["pulsars", "gamma rays", "Fermi-LAT", "phaseograms", "Doppler shift"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Astronomy"
+]
+dependencies = [
+  "numpy>=1.23",
+  "scipy>=1.9",
+  "matplotlib>=3.6",
+  "iminuit>=2.20"
+]
+
+[project.urls]
+Homepage = "https://github.com/your-username/pulsar-four-beam-model"
+Repository = "https://github.com/your-username/pulsar-four-beam-model"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
