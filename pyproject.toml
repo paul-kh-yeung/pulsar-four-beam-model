@@ -10,8 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-  {name = "Paul K. H. Yeung", email = "pkh91yg@icrr.u-tokyo.ac.jp"},
-  {name = "Takayuki Saito"}
+  {name = "Paul K. H. Yeung", email = "pkh91yg@icrr.u-tokyo.ac.jp"}
 ]
 keywords = ["pulsars", "gamma rays", "Fermi-LAT", "phaseograms", "Doppler shift"]
 classifiers = [
@@ -31,8 +30,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/your-username/pulsar-four-beam-model"
-Repository = "https://github.com/your-username/pulsar-four-beam-model"
+Homepage = "https://github.com/paul-kh-yeung/pulsar-four-beam-model"
+Repository = "https://github.com/paul-kh-yeung/pulsar-four-beam-model"
 
 [tool.setuptools.packages.find]
 where = ["src"]

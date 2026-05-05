@@ -5,7 +5,7 @@ by the default configuration of `pulsar-four-beam-model`.
 
 ## Data product
 
-The Vela `.dat` files used by this package are binned gamma-ray phaseograms
+The Vela `.dat` files expected by the default configuration are binned gamma-ray phaseograms
 derived from Fermi Large Area Telescope (Fermi-LAT) observations of the Vela
 pulsar, PSR J0835-4510.
 
@@ -63,8 +63,8 @@ list was then folded into the binned `.dat` phaseograms used by this package.
 
 ## Relation to this software package
 
-The `.dat` files are inputs to the modelling scripts. They are not part of the
-core model implementation.
+When provided, the `.dat` files are inputs to the modelling scripts. 
+They are not part of the core model implementation.
 
 The model itself is implemented in:
 

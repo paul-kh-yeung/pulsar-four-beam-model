@@ -351,6 +351,8 @@ For reproducibility, a fit-output JSON can store them under a block such as:
   "D3cos_RLC": 0.60,
   "P3phase": 0.220,
   "P4phase": 0.470,
+  "Delta_theta_deg": 23.9,
+  "Delta_phi_deg": 2.6,
   "AzDiff_site_deg": -12.4,
   "AzDiff_beam_deg": 38.5
 }
@@ -375,7 +377,11 @@ scripts/
   fit_minuit.py
 docs/
   notation_mapping.md
+DATA_PROVENANCE.md
 ACKNOWLEDGMENTS.md
+CITATION.cff
+LICENSE
+pyproject.toml
 ```
 
 ## Further development
@@ -393,10 +399,10 @@ discussion.
 
 ## Citation
 
-Please cite the ApJ paper (arXiv:2604.28000) and this software.
-See [`CITATION.cff`](CITATION.cff) for full details.
+Please cite the associated ApJ paper and the archived Zenodo release of this
+software when using this package. Citation metadata are provided in
+[`CITATION.cff`](CITATION.cff).
 
 ## License
 
-This draft uses the MIT License. Change this before public release if your group prefers
-BSD-3-Clause, GPL, or a more restrictive license.
+This project is distributed under the MIT License. See [`LICENSE`](LICENSE).

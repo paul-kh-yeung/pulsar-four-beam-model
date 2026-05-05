@@ -1,13 +1,29 @@
-cff-version: 1.2.0
+cff-version: "1.2.0"
 message: "If you use this software, please cite the associated ApJ paper and the archived software release."
-title: "pulsar-four-beam-model"
+
+title: "pulsar-four-beam-model: Geometry-first four-beam modelling code for young gamma-ray pulsars"
+version: "1.0.0"
+date-released: "2026-05-05"
+
 authors:
   - family-names: Yeung
     given-names: Paul K. H.
-version: 0.1.0
-date-released: 2026-05-04
+    orcid: "https://orcid.org/0000-0003-3476-022X"
+
 repository-code: "https://github.com/paul-kh-yeung/pulsar-four-beam-model"
+license: MIT
+
 abstract: "Reference implementation of a geometry-first four-beam model for young gamma-ray pulsar phaseograms."
+
+keywords:
+  - pulsars
+  - gamma rays
+  - Fermi-LAT
+  - phaseograms
+  - Doppler shift
+  - emission geometry
+  - four-beam model
+
 preferred-citation:
   type: article
   title: "A common four-beam geometry reveals altitude-stratified GeV pulses in canonical young pulsars"
