@@ -60,33 +60,120 @@ def plot_all_bands(
     band_models: Mapping[str, EnergyBandModel],
     band_order: Sequence[str],
     titles: Mapping[str, str] | None = None,
+    off_phase: Tuple[float, float] | None = (-0.2, 0.08),
     output: str | Path | None = None,
 ):
     """Plot stacked four-beam decompositions for multiple energy bands."""
     n = len(band_order)
-    fig, axes = plt.subplots(n, 1, figsize=(5.0, 2.2 * n), sharex=True)
+    fig, axes = plt.subplots(
+        n,
+        1,
+        figsize=(5.0, 2.5 * n),
+        sharex=True,
+        gridspec_kw={
+            "wspace": 0,
+            "hspace": 0,
+            "height_ratios": [1] * n,
+        },
+    )
+
     if n == 1:
         axes = [axes]
+
     titles = titles or {}
     phases = geometry.axis_phases()
     colors = {"beam1": "C0", "beam2": "C1", "beam3": "C4", "beam4": "C3"}
-    for ax, band in zip(axes, band_order):
+
+    for idx, (ax, band) in enumerate(zip(axes, band_order)):
         pg = phaseograms[band]
         sim = simulate_four_beam_band(pg.phase, geometry, band_models[band])
+
+        if off_phase is not None:
+            ax.fill_between(
+                pg.phase,
+                0,
+                1,
+                where=(pg.phase >= off_phase[0]) & (pg.phase <= off_phase[1]),
+                transform=ax.get_xaxis_transform(),
+                facecolor="gainsboro",
+                zorder=0,
+                label="OFF phase" if idx == 0 else None,
+            )
+
         for key, color in colors.items():
             ax.axvline(phases[key], ls=":", color=color, lw=1.0)
-        ax.axhline(sim.background, ls=":", color="0.2", lw=1.0)
-        ax.errorbar(pg.phase, pg.counts, pg.count_errors, fmt=".", color="k", ms=3, lw=0.8)
-        ax.plot(pg.phase, sim.model, color="0.25", lw=2.0)
-        ax.plot(pg.phase, sim.background + sim.beam1, color="C0", lw=1.1)
-        ax.plot(pg.phase, sim.background + sim.beam2, color="C1", lw=1.1)
-        ax.plot(pg.phase, sim.background + sim.beam3, color="C4", lw=1.1)
-        ax.plot(pg.phase, sim.background + sim.beam4, color="C3", lw=1.1)
-        ax.set_ylabel(titles.get(band, band))
+
+        ax.axhline(
+            sim.background,
+            ls=":",
+            color="0.2",
+            lw=1.0,
+            label="Bkg" if idx == 0 else None,
+        )
+        ax.plot(
+            pg.phase,
+            sim.model,
+            color="0.25",
+            lw=2.0,
+            zorder=1,
+            label="Total" if idx == 0 else None,
+        )
+        ax.errorbar(
+            pg.phase,
+            pg.counts,
+            pg.count_errors,
+            fmt=".",
+            color="k",
+            ms=3,
+            lw=0.8,
+            zorder=2,
+            label="Data" if idx == 0 else None,
+        )
+        ax.plot(
+            pg.phase,
+            sim.background + sim.beam1,
+            color="C0",
+            lw=1.1,
+            zorder=3,
+            label="Bkg+Beam1" if idx == 0 else None,
+        )
+        ax.plot(
+            pg.phase,
+            sim.background + sim.beam2,
+            color="C1",
+            lw=1.1,
+            zorder=4,
+            label="Bkg+Beam2" if idx == 0 else None,
+        )
+        ax.plot(
+            pg.phase,
+            sim.background + sim.beam3,
+            color="C4",
+            lw=1.1,
+            zorder=5,
+            label="Bkg+Beam3" if idx == 0 else None,
+        )
+        ax.plot(
+            pg.phase,
+            sim.background + sim.beam4,
+            color="C3",
+            lw=1.1,
+            zorder=6,
+            label="Bkg+Beam4" if idx == 0 else None,
+        )
+
+        ax.set_ylabel(f"{titles.get(band, band)} Counts")
+
+    axes[0].legend(fontsize=8, loc="best")
     axes[-1].set_xlabel("Observed phase")
+
     fig.tight_layout()
+
     if output is not None:
+        output = Path(output)
+        output.parent.mkdir(parents=True, exist_ok=True)
         fig.savefig(output, dpi=200)
+
     return fig, axes
 
 
