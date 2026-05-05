@@ -19,9 +19,8 @@ compact generalized-normal-distribution beam kernel.
 This repository is intended as a clean public release of the analysis code. The importable 
 implementation lives in `src/pulsar_four_beam_model/`.
 
-The Fermi-LAT phaseogram data files are **not included** in this draft package. Place the
-corresponding `.dat` files under `data/` or update `configs/vela_v1_97.json` to point to
-your local files.
+The example Vela phaseogram files used by the default configuration `configs/vela_v1_97.json` are 
+placed under `data/`.
 
 ## Installation
 
