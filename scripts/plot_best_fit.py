@@ -16,6 +16,10 @@ from pulsar_four_beam_model.data import load_phaseogram
 from pulsar_four_beam_model.likelihood import joint_deviance
 from pulsar_four_beam_model.model import band_model_from_flat_parameters, geometry_from_flat_parameters
 from pulsar_four_beam_model.plotting import plot_all_bands
+from pulsar_four_beam_model.derived import (
+    compute_derived_geometry,
+    format_derived_geometry,
+)
 
 
 def main() -> None:
@@ -46,9 +50,11 @@ def main() -> None:
     print("Axis phases:")
     for name, value in geometry.axis_phases().items():
         print(f"  {name}: {value:.8f}")
-    print("Derived geometry:")
-    for name, value in geometry.additional_geometric_properties().items():
-        print(f"  {name}: {value:.8f}")
+
+    derived = compute_derived_geometry(params)
+    print("\nDerived geometric quantities")
+    print("----------------------------")
+    print(format_derived_geometry(derived))
 
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)

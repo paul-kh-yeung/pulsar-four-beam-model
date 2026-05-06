@@ -107,12 +107,12 @@ def build_minuit(
     )
     start = {name: float(starting_parameters[name]) for name in active_parameter_names(bands)}
     minuit = Minuit(objective, **start)
-    minuit.errordef = Minuit.LIKELIHOOD
-    apply_default_limits(minuit, starting_parameters, bands=bands)
+    minuit.errordef = 1.0  # Objective is -2 log L.
+    apply_default_limits(minuit, bands=bands)
     return minuit
 
 
-def apply_default_limits(minuit: Minuit, starting_parameters: Mapping[str, float], bands: Sequence[str]) -> None:
+def apply_default_limits(minuit: Minuit, bands: Sequence[str]) -> None:
     """Apply broad, conservative limits similar to the legacy fitting script."""
     minuit.limits["lor"] = (1.01, 91.0)
     minuit.limits["LOR"] = (1.01, 91.0)

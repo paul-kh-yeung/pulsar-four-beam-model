@@ -6,7 +6,6 @@ from pathlib import Path
 from typing import Mapping, Sequence, Tuple
 
 import matplotlib.pyplot as plt
-import numpy as np
 
 from .data import Phaseogram
 from .model import EnergyBandModel, FourBeamGeometry, simulate_four_beam_band
@@ -50,6 +49,8 @@ def plot_phaseogram_decomposition(
     ax.legend(fontsize=8)
     fig.tight_layout()
     if output is not None:
+        output = Path(output)
+        output.parent.mkdir(parents=True, exist_ok=True)
         fig.savefig(output, dpi=200)
     return fig, ax
 

@@ -10,7 +10,7 @@ from .model import (
     simulate_four_beam_band,
 )
 
-from pulsar_four_beam_model.derived import (
+from .derived import (
     DerivedGeometry,
     compute_derived_geometry,
     format_derived_geometry,

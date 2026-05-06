@@ -6,12 +6,13 @@ use this as a reproducible starting point and keep long random-restart campaigns
 in a separate workflow script.
 """
 
-from typing import Any
-from iminuit import Minuit
 from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from typing import Any
+
+from iminuit import Minuit
 
 from pulsar_four_beam_model.config import read_json, write_json
 from pulsar_four_beam_model.data import load_phaseogram

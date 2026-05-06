@@ -35,7 +35,8 @@ def main() -> None:
     for band in cfg.get("band_order", list(cfg["bands"].keys())):
         phaseograms[band] = load_phaseogram(Path(args.data_root) / cfg["bands"][band]["file"])
         band_models[band] = band_model_from_flat_parameters(params, band)
-    print(joint_deviance(phaseograms, geometry, band_models))
+    deviance = joint_deviance(phaseograms, geometry, band_models)
+    print(f"\nJoint deviance (-2 log L): {deviance:.8g}")
 
 
 if __name__ == "__main__":

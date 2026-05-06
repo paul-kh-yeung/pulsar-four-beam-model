@@ -155,32 +155,6 @@ class FourBeamGeometry:
             "beam4": self.higher.second_axis_phase(self.theta_A_deg),
         }
 
-    def additional_geometric_properties(self) -> Dict[str, float]:
-        """Return common derived properties used in the paper tables.
-
-        ``delta_phi_site_deg`` and ``delta_phi_beam_deg`` preserve the formulae
-        used by the original script. Values are not wrapped, so the sign carries
-        the same convention as the paper appendix.
-        """
-        theta_A = self.theta_A_deg * DEG_TO_RAD
-        lower = self.lower
-        higher = self.higher
-        delta_phi_site = 360.0 * (
-            higher.t0_phase
-            - lower.t0_phase
-            + (higher.phase_separation - lower.phase_separation) / 2.0
-            + np.sin(theta_A) * (higher.r_sin_colat_over_rlc - lower.r_sin_colat_over_rlc) / (2.0 * np.pi)
-        )
-        delta_phi_beam = delta_phi_site - (higher.beam_azimuth_deg - lower.beam_azimuth_deg)
-        return {
-            "lower_radius_over_rlc": lower.radius_over_rlc(self.theta_A_deg),
-            "lower_z_over_rlc": lower.vertical_over_rlc(self.theta_A_deg),
-            "higher_radius_over_rlc": higher.radius_over_rlc(self.theta_A_deg),
-            "higher_z_over_rlc": higher.vertical_over_rlc(self.theta_A_deg),
-            "delta_phi_site_deg": float(delta_phi_site),
-            "delta_phi_beam_deg": float(delta_phi_beam),
-        }
-
 
 @dataclass(frozen=True)
 class EnergyBandModel:

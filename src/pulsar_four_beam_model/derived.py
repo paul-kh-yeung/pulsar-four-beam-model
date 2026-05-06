@@ -55,7 +55,7 @@ def _angular_separation_deg(theta1_deg: float, phi1_deg: float,
         + sin(theta1) * sin(theta2) * cos(phi1 - phi2)
     )
 
-    # Numerical safety
+    # Numerical safety against floating-point roundoff.
     cos_delta = max(-1.0, min(1.0, cos_delta))
 
     return acos(cos_delta) * 180.0 / pi
@@ -85,8 +85,10 @@ def compute_derived_geometry(parameters: Mapping[str, float]) -> DerivedGeometry
 
     Expected parameter names follow the legacy/config convention:
 
-    angleA_deg, d1sin, P2minusP1, t___0, thetaQ_deg,
-    D3SIN, P4minusP3, T___O, phiQ_deg.
+    angleA_deg, d1sin, P2minusP1, t___0,
+    thetaM_deg, thetaN_deg, thetaC_deg, thetaQ_deg,
+    D3SIN, P4minusP3, T___O,
+    phiM_deg, phiN_deg, phiC_deg, phiQ_deg.
     """
     angleA_deg = float(parameters["angleA_deg"])
     d1sin = float(parameters["d1sin"])
